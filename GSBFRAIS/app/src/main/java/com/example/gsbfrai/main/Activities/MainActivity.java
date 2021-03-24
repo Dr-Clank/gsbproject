@@ -4,10 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -15,23 +13,21 @@ import com.example.gsbfrai.R;
 import com.example.gsbfrai.main.Adapters.RecyclerViewVisitorAdapter;
 import com.example.gsbfrai.main.Gson.GsonRequest;
 import com.example.gsbfrai.main.Gson.VolleyHelper;
-import com.example.gsbfrai.main.Listners.RecyclerTouchVisitorListener;
 import com.example.gsbfrai.main.Models.Praticien;
 import com.example.gsbfrai.main.Models.Praticiens;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.example.gsbfrai.main.Models.Visiteur;
+import com.example.gsbfrai.main.Models.Visiteurs;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<Praticien> dataPraticien;
+    private List<Visiteur> dataVisiteur;
     private RecyclerViewVisitorAdapter adapter;
 
-    private final String exempleUrl = "http://192.168.210.11/cakephp/index.php/praticiens.json";
+    private final String exempleUrl = "http://192.168.210.11/cakephp/index.php/visiteurs.json";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,12 +49,12 @@ public class MainActivity extends AppCompatActivity {
             detail.putExtra("BOOLEAN",false);
             startActivity(detail);
         })));*/
-        final GsonRequest gsonRequest= new GsonRequest(exempleUrl, Praticiens.class, null, new Response.Listener<Praticiens>() {
+        final GsonRequest gsonRequest= new GsonRequest(exempleUrl, Visiteurs.class, null, new Response.Listener<Visiteurs>() {
             @Override
-            public void onResponse(Praticiens praticiens) {
+            public void onResponse(Visiteurs visiteurs) {
 
-                for (Praticien praticien : praticiens.getPraticiens()) {
-                    dataPraticien.add(praticien);
+                for (Visiteur visiteur : visiteurs.getVisiteurs()) {
+                    dataVisiteur.add(visiteur);
                     recyclerView.setAdapter(adapter);
                 }
             }
@@ -69,11 +65,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         VolleyHelper.getInstance(getApplicationContext()).addToRequestQueue(gsonRequest);
-        adapter = new RecyclerViewVisitorAdapter(dataPraticien);
+        adapter = new RecyclerViewVisitorAdapter(dataVisiteur);
     }
 
 
     private void setDatas() {
-        dataPraticien = new ArrayList<Praticien>();
+        dataVisiteur = new ArrayList<Visiteur>();
     }
 }

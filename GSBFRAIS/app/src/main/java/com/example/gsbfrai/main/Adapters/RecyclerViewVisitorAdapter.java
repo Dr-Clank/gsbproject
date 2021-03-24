@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import com.example.gsbfrai.R;
 import com.example.gsbfrai.main.Models.Praticien;
-import com.example.gsbfrai.main.Models.Praticiens;
+import com.example.gsbfrai.main.Models.Visiteur;
 
 import java.util.List;
 
@@ -14,9 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class RecyclerViewVisitorAdapter  extends RecyclerView.Adapter<RecyclerViewVisitorAdapter.RecyclerViewHolder>  {
-    private List<Praticien> dataModelPraticiens;
-    //private List<Monuments> dataModelMonuments;
-    public RecyclerViewVisitorAdapter(List<Praticien> dataModelPatients) {this.dataModelPraticiens = dataModelPatients; }
+    private List<Visiteur> dataModelVisiteurs;
+    public RecyclerViewVisitorAdapter(List<Visiteur> dataModelPatients) {this.dataModelVisiteurs = dataModelPatients; }
 
     @NonNull
     @Override
@@ -29,12 +28,12 @@ public class RecyclerViewVisitorAdapter  extends RecyclerView.Adapter<RecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewVisitorAdapter.RecyclerViewHolder holder, int position) {
-        holder.tvNom.setText(String.valueOf(dataModelPraticiens.get(position).toString()));
+        holder.tvNom.setText(String.valueOf(dataModelVisiteurs.get(position).toString()));
     }
 
     @Override
     public int getItemCount() {
-        return dataModelPraticiens.size();
+        return dataModelVisiteurs.size();
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
